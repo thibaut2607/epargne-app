@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Saver</title>
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <h1>Money Saver 💼</h1>
+  <p>Votre assistant intelligent pour économiser</p>
+
+  <h2>🧠 Demander à Sage</h2>
+  <label>Prix de l’achat (€): <input type="number" id="prix" /></label><br />
+  <label>Est-ce nécessaire ? <input type="checkbox" id="necessaire" /></label><br />
+  <button onclick="evaluerAchat()">Demander à Sage</button>
+  <p id="conseil"></p>
+
+  <h2>📸 Scan Ticket (OCR simulé)</h2>
+  <input type="file" accept="image/*" onchange="simulerOCR()" /><br />
+  <p id="ocr-output"></p>
+
+  <script src="ia-sage.js"></script>
+  <script>
+    function evaluerAchat() {
+      const prix = parseFloat(document.getElementById('prix').value);
+      const necessaire = document.getElementById('necessaire').checked;
+      const message = conseillerAchat(prix, necessaire);
+      document.getElementById('conseil').textContent = message;
+    }
+
+    function simulerOCR() {
+      document.getElementById('ocr-output').textContent = "🧾 Montant détecté : 12,30€ (simulation)";
+    }
+  </script>
+  <script src="service-worker.js"></script>
+</body>
+</html>
